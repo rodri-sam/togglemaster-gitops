@@ -14,12 +14,13 @@ spec:
         app: evaluation-service
     spec:
       containers:
-      - name: evaluation-service
-        image: 239510186324.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:4976bcf4c39e36ea8d1da2db42aad9635064f581
-        ports:
-        - containerPort: 8004
-        envFrom:
-        - configMapRef:
-            name: evaluation-service-config
-        - secretRef:
-            name: togglemaster-secrets
+        - name: evaluation-service
+          image: 186107385777.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:4976bcf4c39e36ea8d1da2db42aad9635064f581
+          ports:
+            - name: http
+              containerPort: 8004
+          envFrom:
+            - configMapRef:
+                name: evaluation-service-config
+            - secretRef:
+                name: togglemaster-secrets

@@ -14,7 +14,11 @@ spec:
         app: analytics-service
     spec:
       containers:
-      - name: analytics-service
-        image: 239510186324.dkr.ecr.us-east-1.amazonaws.com/analytics-service:052ec12f0571638774980e11df95a135f8d5033c
-        ports:
-        - containerPort: 5000
+        - name: analytics-service
+          image: 186107385777.dkr.ecr.us-east-1.amazonaws.com/analytics-service:052ec12f0571638774980e11df95a135f8d5033c
+          ports:
+            - name: http
+              containerPort: 8005
+          envFrom:
+            - configMapRef:
+                name: analytics-service-config

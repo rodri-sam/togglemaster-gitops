@@ -14,7 +14,17 @@ spec:
         app: flag-service
     spec:
       containers:
-      - name: flag-service
-        image: 239510186324.dkr.ecr.us-east-1.amazonaws.com/flag-service:052ec12f0571638774980e11df95a135f8d5033c
-        ports:
-        - containerPort: 8080
+        - name: flag-service
+          image: 186107385777.dkr.ecr.us-east-1.amazonaws.com/flag-service:052ec12f0571638774980e11df95a135f8d5033c
+          ports:
+            - name: http
+              containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: flag-service-config
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: togglemaster-secrets
+                  key: FLAG_DATABASE_URL

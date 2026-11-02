@@ -14,7 +14,17 @@ spec:
         app: targeting-service
     spec:
       containers:
-      - name: targeting-service
-        image: 239510186324.dkr.ecr.us-east-1.amazonaws.com/targeting-service:052ec12f0571638774980e11df95a135f8d5033c
-        ports:
-        - containerPort: 8080
+        - name: targeting-service
+          image: 186107385777.dkr.ecr.us-east-1.amazonaws.com/targeting-service:052ec12f0571638774980e11df95a135f8d5033c
+          ports:
+            - name: http
+              containerPort: 8003
+          envFrom:
+            - configMapRef:
+                name: targeting-service-config
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: togglemaster-secrets
+                  key: TARGETING_DATABASE_URL
